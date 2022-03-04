@@ -62,7 +62,7 @@ const GmmItem = (function () {
 
 		if (this.hasDamage) {
 			const damages = this.data.data.damage.parts.map((x) => {
-				let damage = simplifyRollFormula(gmmMonster ? Shortcoder.replaceShortcodes(x[0], gmmMonster) : x[0], rollData).trim();
+				let damage = simplifyRollFormula(gmmMonster ? Shortcoder.replaceShortcodes(x[0], gmmMonster) : x[0]).trim();
 				return `${damage}${x[1] ? ` ${game.i18n.format(`gmm.common.damage.${x[1]}`).toLowerCase()}` : ``} damage`;
 			});
 			if ((itemData.consume?.type === 'ammo') && !!this.actor?.items) {
@@ -73,7 +73,7 @@ const GmmItem = (function () {
 					const ammoIsTypeConsumable = (ammoItemData.type === "consumable") && (ammoItemData.data.consumableType === "ammo")
 					if ( ammoCanBeConsumed && ammoIsTypeConsumable ) {
 						damages.push(...ammoItemData.data.damage.parts.map(x => {
-							let damage = simplifyRollFormula(gmmMonster ? Shortcoder.replaceShortcodes(x[0], gmmMonster) : x[0], rollData).trim();
+							let damage = simplifyRollFormula(gmmMonster ? Shortcoder.replaceShortcodes(x[0], gmmMonster) : x[0]).trim();
 							return `${damage}${x[1] ? ` ${game.i18n.format(`gmm.common.damage.${x[1]}`).toLowerCase()}` : ``} damage`;
 						}));
 					}
@@ -313,7 +313,7 @@ const GmmItem = (function () {
 		}
 
 		// Condense the resulting attack bonus formula into a simplified label
-		let toHitLabel = simplifyRollFormula(parts.join('+'), rollData).trim();
+		let toHitLabel = simplifyRollFormula(parts.join('+')).trim();
 		item.labels.toHit = (toHitLabel.charAt(0) !== '-') ? `+ ${toHitLabel}` : toHitLabel;
 
 		// Update labels and return the prepared roll data
